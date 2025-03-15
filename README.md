@@ -35,4 +35,4 @@ Feel free to contribute! Fork the repo, create a branch, make your changes, and 
 This project is licensed under the MIT License.
 
 ## Contact
-For inquiries, reach out to [your email or website].
+For inquiries, reach out to [yassinejanane71@gmail.com].
