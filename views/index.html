@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تيلكلين - خدمات تنظيف منزلية</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Sidebar Animation */
+        #sidebar {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #sidebar.open {
+            transform: translateX(0);
+        }
+
+        /* Overlay for sidebar */
+        #overlay {
+            display: none;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        #overlay.open {
+            display: block;
+        }
+
+        /* Custom styles for modern design */
+        .hero {
+            background: linear-gradient(to right, #3b82f6, #60a5fa);
+            color: white;
+        }
+
+        .service-card {
+            transition: transform 0.2s;
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            background-color: #1f2937;
+        }
+
+        /* Feedback Card Hover Animation */
+        .feedback-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feedback-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Star Rating Design */
+        .star-rating {
+            color: #fbbf24; /* Tailwind's yellow-400 */
+        }
+
+        .star-rating .star {
+            display: inline-block;
+            font-size: 1.25rem;
+        }
+
+        /* Why Choose Us Section */
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-100">
+
+    <!-- Header Section -->
+    <header class="bg-blue-600 text-white py-4 shadow-md">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="text-2xl font-bold">TeleClean</div>
+            <button id="menu-toggle" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+            <nav class="hidden md:flex space-x-4">
+                <a href="/" class="hover:text-gray-300">الرئيسية</a>
+                <a href="/about" class="hover:text-gray-300">من نحن</a>
+                <a href="/services" class="hover:text-gray-300">الخدمات</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sidebar for Mobile -->
+    <div id="sidebar" class="fixed inset-y-0 right-0 w-64 bg-white shadow-lg z-50">
+        <div class="p-4">
+            <button id="close-sidebar" class="text-gray-700 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <nav class="mt-4">
+                <a href="/" class="block py-2 text-gray-700 hover:bg-gray-100">الرئيسية</a>
+                <a href="/about" class="block py-2 text-gray-700 hover:bg-gray-100">من نحن</a>
+                <a href="/services" class="block py-2 text-gray-700 hover:bg-gray-100">الخدمات</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Overlay for Sidebar -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+    <!-- Hero Section -->
+    <section class="hero py-12 md:py-20 text-center">
+        <h1 class="text-4xl font-bold mb-4">خدمات تنظيف منزلية محترفة</h1>
+        <p class="text-lg mb-8">نحن نقدم خدمات تنظيف شاملة مع التركيز على الجودة والموثوقية.</p>
+        <a href="/services" class="bg-white text-blue-600 px-6 py-3 rounded hover:bg-gray-200">احجز خدمة</a>
+    </section>
+
+    <!-- Services Section -->
+    <section class="bg-blue-50 py-12 md:py-20">
+        <h2 class="text-3xl font-bold text-center mb-8">خدماتنا</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="service-card bg-white p-6 rounded shadow hover:shadow-lg">
+                <img src="https://www.calibrecleaning.com.au/wp-content/uploads/2021/10/house-cleaning.jpg" alt="تنظيف المنزل" class="w-full h-48 object-cover rounded mb-4">
+                <h3 class="text-xl font-bold mb-4">تنظيف المنزل</h3>
+                <p class="text-gray-700">نقدم خدمات تنظيف شاملة للمنازل بأسعار معقولة.</p>
+            </div>
+            <div class="service-card bg-white p-6 rounded shadow hover:shadow-lg">
+                <img src="https://th.bing.com/th/id/R.e073fa6e19832a84ba346f36021e4c37?rik=sJMQoR3TFunRyQ&pid=ImgRaw&r=0" alt="تنظيف السجاد" class="w-full h-48 object-cover rounded mb-4">
+                <h3 class="text-xl font-bold mb-4">تنظيف السجاد</h3>
+                <p class="text-gray-700">خدمات تنظيف السجاد باستخدام أحدث التقنيات.</p>
+            </div>
+            <div class="service-card bg-white p-6 rounded shadow hover:shadow-lg">
+                <img src="https://cdn.mos.cms.futurecdn.net/yCLmdbTJtRQ4F82ecAGT3e.jpg" alt="تنظيف النوافذ" class="w-full h-48 object-cover rounded mb-4">
+                <h3 class="text-xl font-bold mb-4">تنظيف النوافذ</h3>
+                <p class="text-gray-700">تنظيف النوافذ بمنتجات آمنة وفعالة.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="bg-white py-12 md:py-20">
+        <h2 class="text-3xl font-bold text-center mb-8">لماذا تختار تيلكلين؟</h2>
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-gray-700 mb-8">
+                في تيلكلين، نقدم خدمات تنظيف منزلية محترفة تلبي أعلى معايير الجودة. نحن نؤمن بأن منزلك يستحق الأفضل، ولهذا نحرص على توفير خدمات تنظيف شاملة باستخدام أحدث التقنيات والمنتجات الآمنة. فريقنا مدرب جيدًا ويتمتع بخبرة واسعة في مجال التنظيف، مما يضمن لك رضا تام ونتائج مبهرة.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white p-6 rounded shadow-lg transform transition-all duration-300">
+                    <div class="text-center mb-4">
+                        <!-- Add your logo here -->
+                        <img src="https://via.placeholder.com/100" alt="Feature 1 Logo" class="w-16 h-16 mx-auto">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">جودة عالية</h3>
+                    <p class="text-gray-700">نستخدم أحدث التقنيات والمنتجات الآمنة لضمان أفضل نتائج التنظيف.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white p-6 rounded shadow-lg transform transition-all duration-300">
+                    <div class="text-center mb-4">
+                        <!-- Add your logo here -->
+                        <img src="https://via.placeholder.com/100" alt="Feature 2 Logo" class="w-16 h-16 mx-auto">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">فريق محترف</h3>
+                    <p class="text-gray-700">فريقنا مدرب جيدًا ويتمتع بخبرة واسعة في مجال التنظيف.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white p-6 rounded shadow-lg transform transition-all duration-300">
+                    <div class="text-center mb-4">
+                        <!-- Add your logo here -->
+                        <img src="https://via.placeholder.com/100" alt="Feature 3 Logo" class="w-16 h-16 mx-auto">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">أسعار تنافسية</h3>
+                    <p class="text-gray-700">نقدم خدماتنا بأسعار معقولة تناسب جميع الفئات.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback (Reviews) Section -->
+    <section class="bg-blue-50 py-12 md:py-20">
+        <h2 class="text-3xl font-bold text-center mb-8">آراء العملاء</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
+            <!-- Feedback Card 1 -->
+            <div class="feedback-card bg-white p-6 rounded shadow-lg transform transition-all duration-300">
+                <div class="star-rating mb-4">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+                <p class="text-gray-700 mb-4">"خدمة ممتازة وفريق محترف. أنصح بهم بشدة!"</p>
+                <p class="text-gray-600">- أحمد</p>
+            </div>
+
+            <!-- Feedback Card 2 -->
+            <div class="feedback-card bg-white p-6 rounded shadow-lg transform transition-all duration-300">
+                <div class="star-rating mb-4">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">☆</span>
+                </div>
+                <p class="text-gray-700 mb-4">"التنظيف كان سريعًا وفعالًا. شكرًا لكم!"</p>
+                <p class="text-gray-600">- فاطمة</p>
+            </div>
+
+            <!-- Feedback Card 3 -->
+            <div class="feedback-card bg-white p-6 rounded shadow-lg transform transition-all duration-300">
+                <div class="star-rating mb-4">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+                <p class="text-gray-700 mb-4">"أسعار معقولة وجودة عالية. أوصي بهم."</p>
+                <p class="text-gray-600">- خالد</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="bg-white py-12 md:py-20">
+        <h2 class="text-3xl font-bold text-center mb-8">شركاؤنا</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto px-4">
+            <div class="flex justify-center items-center">
+                <img src="https://via.placeholder.com/150" alt="Partner 1" class="w-32 h-32 object-contain">
+            </div>
+            <div class="flex justify-center items-center">
+                <img src="https://via.placeholder.com/150" alt="Partner 2" class="w-32 h-32 object-contain">
+            </div>
+            <div class="flex justify-center items-center">
+                <img src="https://via.placeholder.com/150" alt="Partner 3" class="w-32 h-32 object-contain">
+            </div>
+            <div class="flex justify-center items-center">
+                <img src="https://via.placeholder.com/150" alt="Partner 4" class="w-32 h-32 object-contain">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-white py-10 text-center">
+        <p>&copy; 2025 TeleClean - جميع الحقوق محفوظة</p>
+    </footer>
+
+    <!-- JavaScript for Sidebar -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const closeSidebar = document.getElementById('close-sidebar');
+
+        // Open sidebar
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.add('open');
+            overlay.classList.add('open');
+        });
+
+        // Close sidebar
+        closeSidebar.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+        });
+
+        // Close sidebar when clicking outside
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+        });
+    </script>
+</body>
+</html>
