@@ -1,0 +1,38 @@
+<!-- Success message after payment -->
+<div class="container mx-auto p-4 max-w-md text-center">
+    <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+    </svg>
+    
+    <h1 class="text-2xl font-bold mb-2">تمت العملية بنجاح!</h1>
+    <p class="mb-6">شكراً لاستخدامك خدمات تيلكلين</p>
+    
+    <div id="order-details" class="bg-gray-50 p-4 rounded-lg mb-6">
+        <!-- Will be filled by JavaScript -->
+    </div>
+    
+    <a href="/" class="text-blue-600 hover:underline">العودة للصفحة الرئيسية</a>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        const orderId = new URLSearchParams(window.location.search).get("orderId");
+        
+        try {
+            const response = await fetch(`/api/orders/${orderId}`);
+            const order = await response.json();
+            
+            document.getElementById("order-details").innerHTML = `
+                <h2 class="font-semibold mb-2">تفاصيل الطلب</h2>
+                <p>رقم الطلب: ${order._id}</p>
+                <p>طريقة الدفع: ${order.paymentMethod === "card" ? "بطاقة ائتمان" : "نقداً"}</p>
+                <p>حالة الدفع: ${order.paymentStatus === "paid" ? "تم الدفع" : "بانتظار الدفع"}</p>
+            `;
+            
+        } catch (error) {
+            document.getElementById("order-details").innerHTML = `
+                <p class="text-red-500">حدث خطأ في تحميل تفاصيل الطلب</p>
+            `;
+        }
+    });
+</script>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلب خدمة تنظيف - تيلكلين</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .service-card.selected {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .terms-checkbox {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .terms-checkbox input {
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 15px;
+            }
+            
+            .service-card {
+                padding: 8px;
+            }
+            
+            .service-card h3 {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-100">
+    <!-- Header Section -->
+    <header class="bg-blue-600 text-white py-4 shadow-md">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="text-2xl font-bold">TeleClean</div>
+            <nav class="hidden md:flex space-x-4">
+                <a href="/" class="hover:text-gray-300">الرئيسية</a>
+                <a href="/about" class="hover:text-gray-300">من نحن</a>
+                <a href="/services" class="hover:text-gray-300">الخدمات</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Form Section -->
+    <section class="py-8 md:py-20">
+        <div class="form-container">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">طلب خدمة تنظيف</h2>
+            <form id="orderForm" class="space-y-5 md:space-y-6">
+                <!-- Service Selection Cards -->
+                <div class="grid grid-cols-3 gap-2 md:gap-4 mb-6">
+                    <!-- Service 1: House Cleaning -->
+                    <div class="service-card bg-white p-2 md:p-6 rounded shadow-lg text-center" onclick="selectService('تنظيف المنزل')">
+                        <div class="mb-1 md:mb-4">
+                            <img src="home.gif" alt="تنظيف المنزل" class="w-8 h-8 md:w-16 md:h-16 mx-auto">
+                        </div>
+                        <h3 class="text-sm md:text-xl font-bold">تنظيف المنزل</h3>
+                        <p class="text-gray-700 text-xs md:text-base hidden md:block mt-2">نقدم خدمات تنظيف شاملة للمنازل بأسعار معقولة.</p>
+                    </div>
+
+                    <!-- Service 2: Carpet Cleaning -->
+                    <div class="service-card bg-white p-2 md:p-6 rounded shadow-lg text-center" onclick="selectService('تنظيف السجاد')">
+                        <div class="mb-1 md:mb-4">
+                            <img src="carpet.gif" alt="تنظيف السجاد" class="w-8 h-8 md:w-16 md:h-16 mx-auto">
+                        </div>
+                        <h3 class="text-sm md:text-xl font-bold">تنظيف السجاد</h3>
+                        <p class="text-gray-700 text-xs md:text-base hidden md:block mt-2">خدمات تنظيف السجاد باستخدام أحدث التقنيات.</p>
+                    </div>
+
+                    <!-- Service 3: Window Cleaning -->
+                    <div class="service-card bg-white p-2 md:p-6 rounded shadow-lg text-center" onclick="selectService('تنظيف النوافذ')">
+                        <div class="mb-1 md:mb-4">
+                            <img src="windows.gif" alt="تنظيف النوافذ" class="w-8 h-8 md:w-16 md:h-16 mx-auto">
+                        </div>
+                        <h3 class="text-sm md:text-xl font-bold">تنظيف النوافذ</h3>
+                        <p class="text-gray-700 text-xs md:text-base hidden md:block mt-2">تنظيف النوافذ بمنتجات آمنة وفعالة.</p>
+                    </div>
+                </div>
+
+                <!-- Hidden Input for Selected Service -->
+                <input type="hidden" id="service" name="service" required>
+
+                <!-- Name -->
+                <div>
+                    <label for="name" class="block text-gray-700">الاسم الكامل</label>
+                    <input type="text" id="name" name="name" required class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-gray-700">البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email" required class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
+                </div>
+
+                <!-- Phone -->
+                <div>
+                    <label for="phone" class="block text-gray-700">رقم الهاتف</label>
+                    <input type="tel" id="phone" name="phone" required class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
+                </div>
+
+                <!-- Address -->
+                <div>
+                    <label for="address" class="block text-gray-700">العنوان</label>
+                    <textarea id="address" name="address" required class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+                </div>
+
+                <!-- Number of Rooms -->
+                <div>
+                    <label for="rooms" class="block text-gray-700">عدد الغرف</label>
+                    <input type="number" id="rooms" name="rooms" min="1" required class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
+                </div>
+
+                <!-- Additional Notes -->
+                <div>
+                    <label for="notes" class="block text-gray-700">ملاحظات إضافية</label>
+                    <textarea id="notes" name="notes" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" name="terms" required class="form-checkbox h-5 w-5 text-blue-600">
+                    <label for="terms" class="text-gray-700">
+                        أوافق على <a href="#" onclick="openTermsModal(); return false;" class="text-blue-600 hover:underline">الشروط والأحكام</a>
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">إرسال الطلب</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Terms and Conditions Modal -->
+    <div id="terms-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="bg-white p-6 rounded-lg max-w-2xl mx-auto mt-10 m-4">
+            <h3 class="text-xl md:text-2xl font-bold mb-4">الشروط والأحكام</h3>
+            <p class="text-gray-700 mb-4">
+                نحن في تيلكلين نلتزم بحماية خصوصيتك وبياناتك الشخصية. البيانات التي تقدمها لنا ستستخدم فقط لغرض تقديم الخدمات المطلوبة ولن يتم مشاركتها مع أي أطراف خارجية لأي أغراض تجارية أو غيرها.
+            </p>
+            <p class="text-gray-700 mb-4">
+                نضمن لك أن بياناتك ستكون آمنة ولن يتم استخدامها لأي أغراض غير مشروعة أو ضارة. يمكنك الاطلاع على سياسة الخصوصية الكاملة <a href="/privacy-policy" class="text-blue-600 hover:underline">هنا</a>.
+            </p>
+            <button onclick="closeTermsModal()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-6 md:py-10 text-center mt-8">
+        <p>&copy; 2025 TeleClean - جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script>
+        // Function to select a service
+        function selectService(service) {
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            document.getElementById('service').value = service;
+        }
+    
+        // Modal functions
+        function openTermsModal() {
+            document.getElementById('terms-modal').classList.remove('hidden');
+        }
+        function closeTermsModal() {
+            document.getElementById('terms-modal').classList.add('hidden');
+        }
+    
+        // Form submission handler
+        document.getElementById('orderForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    if (!validateForm()) return;
+    
+    const submitBtn = event.target.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'جاري المعالجة...';
+    
+    try {
+        const formData = {
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            address: document.getElementById('address').value.trim(),
+            service: document.getElementById('service').value,
+            rooms: parseInt(document.getElementById('rooms').value),
+            notes: document.getElementById('notes').value.trim()
+        };
+        
+        const response = await fetch('/submit-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.error || 'Request failed');
+        }
+        
+        if (data.success && data.redirectUrl) {
+            window.location.href = data.redirectUrl; // This will now go to payment-method.html
+        } else {
+            throw new Error(data.error || 'Unknown error occurred');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert(error.message || 'حدث خطأ أثناء إرسال الطلب');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'إرسال الطلب';
+    }
+});
+        function validateForm() {
+            // Validate service selection
+            const service = document.getElementById('service').value;
+            if (!service) {
+                alert('يرجى اختيار نوع الخدمة قبل المتابعة.');
+                return false;
+            }
+            
+            // Validate terms checkbox
+            if (!document.getElementById('terms').checked) {
+                alert('يرجى الموافقة على الشروط والأحكام قبل المتابعة.');
+                return false;
+            }
+            
+            // Validate required fields
+            const requiredFields = ['name', 'email', 'phone', 'address', 'rooms'];
+            for (const fieldId of requiredFields) {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    alert(`يرجى ملء حقل ${field.previousElementSibling.textContent}`);
+                    field.focus();
+                    return false;
+                }
+            }
+            
+            // Validate email format
+            const email = document.getElementById('email').value;
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                alert('يرجى إدخال بريد إلكتروني صحيح');
+                return false;
+            }
+            
+            return true;
+        }
+    </script>
+</body>
+</html>
