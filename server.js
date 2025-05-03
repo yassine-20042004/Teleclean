@@ -45,6 +45,7 @@ const userSchema = new mongoose.Schema({
     skills: { type: [String], default: [] },
     location: { type: String },
     offers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Offer" }],
+    pricePerHour: { type: Number }, 
     bookings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Booking" }]
 });
 
@@ -331,6 +332,36 @@ app.get("/api/orders/:orderId", async (req, res) => {
     }
 });
 
+// أضف هذا قبل بدء الخادم
+app.get("/cleaner-signup", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "cleaner-signup.html"));
+});
+
+app.post("/api/cleaners", async (req, res) => {
+    try {
+        const { name, email, skills, price, location } = req.body;
+        
+        // تحقق من البريد الإلكتروني الموجود
+        if (await User.findOne({ email })) {
+            return res.status(400).json({ error: "البريد الإلكتروني مسجل مسبقًا" });
+        }
+
+        const newCleaner = new User({
+            name,
+            email,
+            role: "cleaner",
+            skills,
+            pricePerHour: price,
+            location,
+            password: "temp_password" // يمكنك إضافة نظام كلمات مرور لاحقًا
+        });
+
+        await newCleaner.save();
+        res.status(201).json({ message: "تم التسجيل بنجاح" });
+    } catch (error) {
+        res.status(500).json({ error: "خطأ في التسجيل" });
+    }
+});
 app.get("/cleaner-profile/:id/offers", async (req, res) => {
     try {
         const user = await User.findById(req.params.id).populate("offers");

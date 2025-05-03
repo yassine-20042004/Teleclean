@@ -1,15 +1,31 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تيلكلين - خدمات تنظيف منزلية</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
     <style>
+        /* Base Styles */
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body.ltr {
+            font-family: 'Poppins', sans-serif;
+        }
+
         /* Sidebar Animation */
         #sidebar {
             transform: translateX(100%);
             transition: transform 0.3s ease-in-out;
+        }
+
+        html[dir="ltr"] #sidebar {
+            transform: translateX(-100%);
+            left: 0;
+            right: auto;
         }
 
         #sidebar.open {
@@ -26,88 +42,241 @@
             display: block;
         }
 
-        /* Custom styles for modern design */
-        .hero {
-            background: linear-gradient(to right, #3b82f6, #60a5fa);
-            color: white;
+        /* Modern Design Elements */
+        .gradient-bg {
+            background: linear-gradient(135deg, #06b6d4, #0ea5e9, #3b82f6);
+            background-size: 200% 200%;
+            animation: gradient-animation 15s ease infinite;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .service-card {
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
         .service-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .footer {
-            background-color: #1f2937;
-        }
-
-        /* Feedback Card Hover Animation */
-        .feedback-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feedback-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
         }
 
-        /* Star Rating Design */
-        .star-rating {
-            color: #fbbf24; /* Tailwind's yellow-400 */
+        .service-card img {
+            transition: transform 0.5s ease;
         }
 
-        .star-rating .star {
-            display: inline-block;
-            font-size: 1.25rem;
+        .service-card:hover img {
+            transform: scale(1.05);
         }
 
-        /* Why Choose Us Section */
+        /* Feature Cards */
         .feature-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            border-radius: 16px;
+            overflow: hidden;
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem auto;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Feedback Cards */
+        .feedback-card {
+            transition: all 0.3s ease;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .feedback-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Star Rating */
+        .star-rating {
+            color: #f59e0b;
+            font-size: 1.25rem;
+        }
+
+        /* Call to Action Button */
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover:before {
+            width: 100%;
+        }
+
+        /* Partners Section */
+        .partner-logo {
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* Footer */
+        .footer-gradient {
+            background: linear-gradient(to right, #0f172a, #1e293b);
+        }
+        
+        /* Language Toggle */
+        .language-toggle {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .language-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .language-toggle span {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .language-toggle .active {
+            background: white;
+            color: #3b82f6;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* RTL/LTR specific adjustments */
+        .rtl-mr {
+            margin-right: 0.75rem;
+        }
+
+        .ltr-ml {
+            margin-left: 0;
+        }
+
+        html[dir="ltr"] .rtl-mr {
+            margin-right: 0;
+        }
+
+        html[dir="ltr"] .ltr-ml {
+            margin-left: 0.75rem;
+        }
+
+        html[dir="ltr"] .rtl-ml {
+            margin-left: 0;
+        }
+
+        html[dir="ltr"] .ltr-mr {
+            margin-right: 0.75rem;
         }
     </style>
 </head>
-<body class="font-sans bg-gray-100">
+<body class="bg-gray-50">
 
     <!-- Header Section -->
-    <header class="bg-blue-600 text-white py-4 shadow-md">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <div class="text-2xl font-bold">TeleClean</div>
-            <button id="menu-toggle" class="md:hidden focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
-            <nav class="hidden md:flex space-x-4">
-                <a href="/" class="hover:text-gray-300">الرئيسية</a>
-                <a href="/about" class="hover:text-gray-300">من نحن</a>
-                <a href="/services" class="hover:text-gray-300">الخدمات</a>
+    <header class="sticky top-0 z-40 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-600">TeleClean</div>
+            
+            <div class="flex items-center space-x-4 md:space-x-8">
+                <!-- Language Toggle -->
+                <div class="language-toggle" id="languageToggle">
+                    <span class="active" data-lang="ar">العربية</span>
+                    <span data-lang="en">English</span>
+                </div>
+                
+                <button id="menu-toggle" class="md:hidden focus:outline-none text-blue-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8" id="mainNav">
+                <a href="/" class="font-medium text-gray-700 hover:text-blue-600 transition-colors" data-key="home">الرئيسية</a>
+                <a href="/about" class="font-medium text-gray-700 hover:text-blue-600 transition-colors" data-key="about">من نحن</a>
+                <a href="/services" class="font-medium text-gray-700 hover:text-blue-600 transition-colors" data-key="services">الخدمات</a>
+                <a href="/cleaner-signup" class="font-medium text-gray-700 hover:text-blue-600 transition-colors" data-key="register">تسجيل كمنظفة</a>
             </nav>
         </div>
     </header>
 
     <!-- Sidebar for Mobile -->
-    <div id="sidebar" class="fixed inset-y-0 right-0 w-64 bg-white shadow-lg z-50">
-        <div class="p-4">
-            <button id="close-sidebar" class="text-gray-700 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-            <nav class="mt-4">
-                <a href="/" class="block py-2 text-gray-700 hover:bg-gray-100">الرئيسية</a>
-                <a href="/about" class="block py-2 text-gray-700 hover:bg-gray-100">من نحن</a>
-                <a href="/services" class="block py-2 text-gray-700 hover:bg-gray-100">الخدمات</a>
+    <div id="sidebar" class="fixed inset-y-0 w-64 bg-white shadow-lg z-50">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <div class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-600">TeleClean</div>
+                <button id="close-sidebar" class="text-gray-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="space-y-4" id="sidebarNav">
+                <a href="/" class="block py-2 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors" data-key="home">الرئيسية</a>
+                <a href="/about" class="block py-2 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors" data-key="about">من نحن</a>
+                <a href="/services" class="block py-2 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors" data-key="services">الخدمات</a>
+                <a href="/cleaner-signup" class="block py-2 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors" data-key="register">تسجيل كمنظفة</a>
             </nav>
+            
+            <!-- Language Toggle in Sidebar -->
+            <div class="mt-6 flex justify-center">
+                <div class="language-toggle bg-gray-100" id="sidebarLanguageToggle">
+                    <span class="active" data-lang="ar">العربية</span>
+                    <span data-lang="en">English</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -115,146 +284,280 @@
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 
     <!-- Hero Section -->
-    <section class="hero py-12 md:py-20 text-center">
-        <h1 class="text-4xl font-bold mb-4">خدمات تنظيف منزلية محترفة</h1>
-        <p class="text-lg mb-8">نحن نقدم خدمات تنظيف شاملة مع التركيز على الجودة والموثوقية.</p>
-        <a href="/order-service" class="bg-white text-blue-600 px-6 py-3 rounded hover:bg-gray-200">احجز خدمة</a>
+    <section class="gradient-bg py-20 md:py-32 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <defs>
+                    <pattern id="pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <circle cx="20" cy="20" r="1" fill="white" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#pattern)" />
+            </svg>
+        </div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight" data-key="hero-title">خدمات تنظيف منزلية <span class="text-yellow-300" data-key="hero-title-highlight">محترفة</span></h1>
+            <p class="text-xl md:text-2xl text-white opacity-90 mb-10 max-w-3xl mx-auto" data-key="hero-subtitle">نحن نقدم خدمات تنظيف شاملة مع التركيز على الجودة والموثوقية لمنزل أكثر نظافة وراحة.</p>
+            <a href="/order-service" class="cta-button inline-block bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all" data-key="book-now">احجز خدمة الآن</a>
+        </div>
     </section>
 
     <!-- Services Section -->
-    <section class="bg-blue-50 py-12 md:py-20">
-        <h2 class="text-3xl font-bold text-center mb-8">خدماتنا</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="service-card bg-white p-6 rounded shadow hover:shadow-lg">
-                <img src="https://www.calibrecleaning.com.au/wp-content/uploads/2021/10/house-cleaning.jpg" alt="تنظيف المنزل" class="w-full h-48 object-cover rounded mb-4">
-                <h3 class="text-xl font-bold mb-4">تنظيف المنزل</h3>
-                <p class="text-gray-700">نقدم خدمات تنظيف شاملة للمنازل بأسعار معقولة.</p>
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-gray-800" data-key="services-title">خدماتنا المميزة</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-key="services-subtitle">نقدم مجموعة متنوعة من خدمات التنظيف عالية الجودة لتلبية احتياجاتك</p>
             </div>
-            <div class="service-card bg-white p-6 rounded shadow hover:shadow-lg">
-                <img src="https://th.bing.com/th/id/R.e073fa6e19832a84ba346f36021e4c37?rik=sJMQoR3TFunRyQ&pid=ImgRaw&r=0" alt="تنظيف السجاد" class="w-full h-48 object-cover rounded mb-4">
-                <h3 class="text-xl font-bold mb-4">تنظيف السجاد</h3>
-                <p class="text-gray-700">خدمات تنظيف السجاد باستخدام أحدث التقنيات.</p>
-            </div>
-            <div class="service-card bg-white p-6 rounded shadow hover:shadow-lg">
-                <img src="https://cdn.mos.cms.futurecdn.net/yCLmdbTJtRQ4F82ecAGT3e.jpg" alt="تنظيف النوافذ" class="w-full h-48 object-cover rounded mb-4">
-                <h3 class="text-xl font-bold mb-4">تنظيف النوافذ</h3>
-                <p class="text-gray-700">تنظيف النوافذ بمنتجات آمنة وفعالة.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="service-card bg-white">
+                    <div class="overflow-hidden">
+                        <img src="https://www.calibrecleaning.com.au/wp-content/uploads/2021/10/house-cleaning.jpg" alt="تنظيف المنزل" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800" data-key="service-1-title">تنظيف المنزل</h3>
+                        <p class="text-gray-600 mb-4" data-key="service-1-desc">نقدم خدمات تنظيف شاملة للمنازل بأسعار معقولة تناسب جميع الميزانيات.</p>
+                        <a href="/house-cleaning" class="inline-block text-blue-600 font-medium hover:text-blue-800 transition-colors" data-key="learn-more">اكتشف المزيد ←</a>
+                    </div>
+                </div>
+                <div class="service-card bg-white">
+                    <div class="overflow-hidden">
+                        <img src="https://th.bing.com/th/id/R.e073fa6e19832a84ba346f36021e4c37?rik=sJMQoR3TFunRyQ&pid=ImgRaw&r=0" alt="تنظيف السجاد" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800" data-key="service-2-title">تنظيف السجاد</h3>
+                        <p class="text-gray-600 mb-4" data-key="service-2-desc">خدمات تنظيف السجاد باستخدام أحدث التقنيات والمعدات المتطورة.</p>
+                        <a href="/carpet-cleaning" class="inline-block text-blue-600 font-medium hover:text-blue-800 transition-colors" data-key="learn-more">اكتشف المزيد ←</a>
+                    </div>
+                </div>
+                <div class="service-card bg-white">
+                    <div class="overflow-hidden">
+                        <img src="https://cdn.mos.cms.futurecdn.net/yCLmdbTJtRQ4F82ecAGT3e.jpg" alt="تنظيف النوافذ" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800" data-key="service-3-title">تنظيف النوافذ</h3>
+                        <p class="text-gray-600 mb-4" data-key="service-3-desc">تنظيف النوافذ بمنتجات آمنة وفعالة لنتائج لامعة وخالية من البقع.</p>
+                        <a href="/window-cleaning" class="inline-block text-blue-600 font-medium hover:text-blue-800 transition-colors" data-key="learn-more">اكتشف المزيد ←</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Why Choose Us Section -->
-    <section class="bg-white py-12 md:py-20">
-        <h2 class="text-3xl font-bold text-center mb-8">لماذا تختار تيلكلين؟</h2>
-        <div class="max-w-4xl mx-auto text-center">
-            <p class="text-gray-700 mb-8">
-                في تيلكلين، نقدم خدمات تنظيف منزلية محترفة تلبي أعلى معايير الجودة. نحن نؤمن بأن منزلك يستحق الأفضل، ولهذا نحرص على توفير خدمات تنظيف شاملة باستخدام أحدث التقنيات والمنتجات الآمنة. فريقنا مدرب جيدًا ويتمتع بخبرة واسعة في مجال التنظيف، مما يضمن لك رضا تام ونتائج مبهرة.
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-gray-800" data-key="why-choose-title">لماذا تختار تيلكلين؟</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-key="why-choose-subtitle">
+                    في تيلكلين، نقدم خدمات تنظيف منزلية محترفة تلبي أعلى معايير الجودة. نحن نؤمن بأن منزلك يستحق الأفضل.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 <!-- Feature 1 -->
-                <div class="feature-card bg-white p-6 rounded shadow-lg transform transition-all duration-300">
-                    <div class="text-center mb-4">
-                        <!-- Add your logo here -->
-                        <img src="quality.png" alt="Feature 1 Logo" class="w-16 h-16 mx-auto">
+                <div class="feature-card bg-white p-8 rounded-2xl shadow-sm">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">جودة عالية</h3>
-                    <p class="text-gray-700">نستخدم أحدث التقنيات والمنتجات الآمنة لضمان أفضل نتائج التنظيف.</p>
+                    <h3 class="text-xl font-bold mb-3 text-center text-gray-800" data-key="feature-1-title">جودة عالية</h3>
+                    <p class="text-gray-600 text-center" data-key="feature-1-desc">نستخدم أحدث التقنيات والمنتجات الآمنة لضمان أفضل نتائج التنظيف.</p>
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="feature-card bg-white p-6 rounded shadow-lg transform transition-all duration-300">
-                    <div class="text-center mb-4">
-                        <!-- Add your logo here -->
-                        <img src="pro.png" alt="Feature 2 Logo" class="w-16 h-16 mx-auto">
+                <div class="feature-card bg-white p-8 rounded-2xl shadow-sm">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">فريق محترف</h3>
-                    <p class="text-gray-700">فريقنا مدرب جيدًا ويتمتع بخبرة واسعة في مجال التنظيف.</p>
+                    <h3 class="text-xl font-bold mb-3 text-center text-gray-800" data-key="feature-2-title">فريق محترف</h3>
+                    <p class="text-gray-600 text-center" data-key="feature-2-desc">فريقنا مدرب جيدًا ويتمتع بخبرة واسعة في مجال التنظيف.</p>
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="feature-card bg-white p-6 rounded shadow-lg transform transition-all duration-300">
-                    <div class="text-center mb-4">
-                        <!-- Add your logo here -->
-                        <img src="best-price.png" alt="Feature 3 Logo" class="w-16 h-16 mx-auto">
+                <div class="feature-card bg-white p-8 rounded-2xl shadow-sm">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">أسعار تنافسية</h3>
-                    <p class="text-gray-700">نقدم خدماتنا بأسعار معقولة تناسب جميع الفئات.</p>
+                    <h3 class="text-xl font-bold mb-3 text-center text-gray-800" data-key="feature-3-title">أسعار تنافسية</h3>
+                    <p class="text-gray-600 text-center" data-key="feature-3-desc">نقدم خدماتنا بأسعار معقولة تناسب جميع الفئات.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Feedback (Reviews) Section -->
-    <section class="bg-blue-50 py-12 md:py-20">
-        <h2 class="text-3xl font-bold text-center mb-8">آراء العملاء</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
-            <!-- Feedback Card 1 -->
-            <div class="feedback-card bg-white p-6 rounded shadow-lg transform transition-all duration-300">
-                <div class="star-rating mb-4">
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                </div>
-                <p class="text-gray-700 mb-4">"خدمة ممتازة وفريق محترف. أنصح بهم بشدة!"</p>
-                <p class="text-gray-600">- أحمد</p>
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-gray-800" data-key="reviews-title">آراء العملاء</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-key="reviews-subtitle">اطلع على تجارب عملائنا السابقين مع خدماتنا</p>
             </div>
-
-            <!-- Feedback Card 2 -->
-            <div class="feedback-card bg-white p-6 rounded shadow-lg transform transition-all duration-300">
-                <div class="star-rating mb-4">
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">☆</span>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Feedback Card 1 -->
+                <div class="feedback-card bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="star-rating mb-4 text-center">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="text-gray-700 mb-6 text-center" data-key="review-1">"خدمة ممتازة وفريق محترف. المنزل أصبح نظيفًا تمامًا وبرائحة منعشة. أنصح بهم بشدة!"</p>
+                    <div class="flex items-center justify-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-xl">أ</div>
+                        <div class="mr-3 rtl-mr ltr-ml">
+                            <p class="font-bold text-gray-800" data-key="reviewer-1">أحمد محمد</p>
+                            <p class="text-sm text-gray-500" data-key="location-1">الرياض</p>
+                        </div>
+                    </div>
                 </div>
-                <p class="text-gray-700 mb-4">"التنظيف كان سريعًا وفعالًا. شكرًا لكم!"</p>
-                <p class="text-gray-600">- فاطمة</p>
-            </div>
 
-            <!-- Feedback Card 3 -->
-            <div class="feedback-card bg-white p-6 rounded shadow-lg transform transition-all duration-300">
-                <div class="star-rating mb-4">
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
+                <!-- Feedback Card 2 -->
+                <div class="feedback-card bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="star-rating mb-4 text-center">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">☆</span>
+                    </div>
+                    <p class="text-gray-700 mb-6 text-center" data-key="review-2">"التنظيف كان سريعًا وفعالًا. الفريق محترف ومتعاون. سأستعين بخدماتهم مرة أخرى. شكرًا لكم!"</p>
+                    <div class="flex items-center justify-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-xl">ف</div>
+                        <div class="mr-3 rtl-mr ltr-ml">
+                            <p class="font-bold text-gray-800" data-key="reviewer-2">فاطمة علي</p>
+                            <p class="text-sm text-gray-500" data-key="location-2">جدة</p>
+                        </div>
+                    </div>
                 </div>
-                <p class="text-gray-700 mb-4">"أسعار معقولة وجودة عالية. أوصي بهم."</p>
-                <p class="text-gray-600">- خالد</p>
+
+                <!-- Feedback Card 3 -->
+                <div class="feedback-card bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="star-rating mb-4 text-center">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="text-gray-700 mb-6 text-center" data-key="review-3">"أسعار معقولة وجودة عالية. السجاد أصبح نظيفًا كالجديد. فريق عمل متميز ومحترف. أوصي بهم."</p>
+                    <div class="flex items-center justify-center">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold text-xl">خ</div>
+                        <div class="mr-3 rtl-mr ltr-ml">
+                            <p class="font-bold text-gray-800" data-key="reviewer-3">خالد عبدالله</p>
+                            <p class="text-sm text-gray-500" data-key="location-3">الدمام</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Call to Action Section -->
+    <section class="gradient-bg py-16 md:py-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <defs>
+                    <pattern id="pattern2" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <circle cx="20" cy="20" r="1" fill="white" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#pattern2)" />
+            </svg>
+        </div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6" data-key="cta-title">جاهز لتجربة خدماتنا؟</h2>
+            <p class="text-xl text-white opacity-90 mb-8 max-w-2xl mx-auto" data-key="cta-subtitle">احصل على منزل نظيف ومريح مع خدماتنا المتميزة. احجز الآن واستمتع بخصم 15% على أول حجز.</p>
+            <a href="/order-service" class="cta-button inline-block bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all" data-key="book-now">احجز خدمة الآن</a>
+        </div>
+    </section>
+
     <!-- Partners Section -->
-    <section class="bg-white py-12 md:py-20">
-        <h2 class="text-3xl font-bold text-center mb-8">شركاؤنا</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto px-4">
-            <div class="flex justify-center items-center">
-                <img src="https://via.placeholder.com/150" alt="Partner 1" class="w-32 h-32 object-contain">
-            </div>
-            <div class="flex justify-center items-center">
-                <img src="https://via.placeholder.com/150" alt="Partner 2" class="w-32 h-32 object-contain">
-            </div>
-            <div class="flex justify-center items-center">
-                <img src="https://via.placeholder.com/150" alt="Partner 3" class="w-32 h-32 object-contain">
-            </div>
-            <div class="flex justify-center items-center">
-                <img src="https://via.placeholder.com/150" alt="Partner 4" class="w-32 h-32 object-contain">
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800" data-key="partners-title">شركاؤنا</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="flex justify-center items-center">
+                    <img src="https://via.placeholder.com/150" alt="Partner 1" class="w-32 h-32 object-contain partner-logo">
+                </div>
+                <div class="flex justify-center items-center">
+                    <img src="https://via.placeholder.com/150" alt="Partner 2" class="w-32 h-32 object-contain partner-logo">
+                </div>
+                <div class="flex justify-center items-center">
+                    <img src="https://via.placeholder.com/150" alt="Partner 3" class="w-32 h-32 object-contain partner-logo">
+                </div>
+                <div class="flex justify-center items-center">
+                    <img src="https://via.placeholder.com/150" alt="Partner 4" class="w-32 h-32 object-contain partner-logo">
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer text-white py-10 text-center">
-        <p>&copy; 2025 TeleClean - جميع الحقوق محفوظة</p>
+    <footer class="footer-gradient text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">TeleClean</h3>
+                    <p class="text-gray-300" data-key="footer-desc">خدمات تنظيف منزلية محترفة بأسعار معقولة.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4" data-key="quick-links">روابط سريعة</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="text-gray-300 hover:text-white transition-colors" data-key="home">الرئيسية</a></li>
+                        <li><a href="/about" class="text-gray-300 hover:text-white transition-colors" data-key="about">من نحن</a></li>
+                        <li><a href="/services" class="text-gray-300 hover:text-white transition-colors" data-key="services">الخدمات</a></li>
+                        <li><a href="/contact" class="text-gray-300 hover:text-white transition-colors" data-key="contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4" data-key="our-services">خدماتنا</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/house-cleaning" class="text-gray-300 hover:text-white transition-colors" data-key="service-1-title">تنظيف المنزل</a></li>
+                        <li><a href="/carpet-cleaning" class="text-gray-300 hover:text-white transition-colors" data-key="service-2-title">تنظيف السجاد</a></li>
+                        <li><a href="/window-cleaning" class="text-gray-300 hover:text-white transition-colors" data-key="service-3-title">تنظيف النوافذ</a></li>
+                        <li><a href="/deep-cleaning" class="text-gray-300 hover:text-white transition-colors" data-key="deep-cleaning">التنظيف العميق</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4" data-key="contact-us">تواصل معنا</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 rtl-ml ltr-mr" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            <span data-key="phone">+966 12 345 6789</span>
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 rtl-ml ltr-mr" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <span data-key="email">info@teleclean.com</span>
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 rtl-ml ltr-mr" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span data-key="address">الرياض، المملكة العربية السعودية</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gray-700 text-center">
+                <p data-key="copyright">&copy; 2025 TeleClean - جميع الحقوق محفوظة</p>
+            </div>
+        </div>
     </footer>
 
-    <!-- JavaScript for Sidebar -->
+    <!-- JavaScript for Sidebar and Language Toggle -->
     <script>
+        // Sidebar functionality
         const menuToggle = document.getElementById('menu-toggle');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
@@ -277,6 +580,166 @@
             sidebar.classList.remove('open');
             overlay.classList.remove('open');
         });
+        
+        // Language Toggle Functionality
+        const htmlRoot = document.getElementById('htmlRoot');
+        const languageToggle = document.getElementById('languageToggle');
+        const sidebarLanguageToggle = document.getElementById('sidebarLanguageToggle');
+        
+        // Translations
+        const translations = {
+            'ar': {
+                'home': 'الرئيسية',
+                'about': 'من نحن',
+                'services': 'الخدمات',
+                'register': 'تسجيل كمنظفة',
+                'hero-title': 'خدمات تنظيف منزلية',
+                'hero-title-highlight': 'محترفة',
+                'hero-subtitle': 'نحن نقدم خدمات تنظيف شاملة مع التركيز على الجودة والموثوقية لمنزل أكثر نظافة وراحة.',
+                'book-now': 'احجز خدمة الآن',
+                'services-title': 'خدماتنا المميزة',
+                'services-subtitle': 'نقدم مجموعة متنوعة من خدمات التنظيف عالية الجودة لتلبية احتياجاتك',
+                'service-1-title': 'تنظيف المنزل',
+                'service-1-desc': 'نقدم خدمات تنظيف شاملة للمنازل بأسعار معقولة تناسب جميع الميزانيات.',
+                'service-2-title': 'تنظيف السجاد',
+                'service-2-desc': 'خدمات تنظيف السجاد باستخدام أحدث التقنيات والمعدات المتطورة.',
+                'service-3-title': 'تنظيف النوافذ',
+                'service-3-desc': 'تنظيف النوافذ بمنتجات آمنة وفعالة لنتائج لامعة وخالية من البقع.',
+                'learn-more': 'اكتشف المزيد ←',
+                'why-choose-title': 'لماذا تختار تيلكلين؟',
+                'why-choose-subtitle': 'في تيلكلين، نقدم خدمات تنظيف منزلية محترفة تلبي أعلى معايير الجودة. نحن نؤمن بأن منزلك يستحق الأفضل.',
+                'feature-1-title': 'جودة عالية',
+                'feature-1-desc': 'نستخدم أحدث التقنيات والمنتجات الآمنة لضمان أفضل نتائج التنظيف.',
+                'feature-2-title': 'فريق محترف',
+                'feature-2-desc': 'فريقنا مدرب جيدًا ويتمتع بخبرة واسعة في مجال التنظيف.',
+                'feature-3-title': 'أسعار تنافسية',
+                'feature-3-desc': 'نقدم خدماتنا بأسعار معقولة تناسب جميع الفئات.',
+                'reviews-title': 'آراء العملاء',
+                'reviews-subtitle': 'اطلع على تجارب عملائنا السابقين مع خدماتنا',
+                'review-1': '"خدمة ممتازة وفريق محترف. المنزل أصبح نظيفًا تمامًا وبرائحة منعشة. أنصح بهم بشدة!"',
+                'reviewer-1': 'أحمد محمد',
+                'location-1': 'الرياض',
+                'review-2': '"التنظيف كان سريعًا وفعالًا. الفريق محترف ومتعاون. سأستعين بخدماتهم مرة أخرى. شكرًا لكم!"',
+                'reviewer-2': 'فاطمة علي',
+                'location-2': 'جدة',
+                'review-3': '"أسعار معقولة وجودة عالية. السجاد أصبح نظيفًا كالجديد. فريق عمل متميز ومحترف. أوصي بهم."',
+                'reviewer-3': 'خالد عبدالله',
+                'location-3': 'الدمام',
+                'cta-title': 'جاهز لتجربة خدماتنا؟',
+                'cta-subtitle': 'احصل على منزل نظيف ومريح مع خدماتنا المتميزة. احجز الآن واستمتع بخصم 15% على أول حجز.',
+                'partners-title': 'شركاؤنا',
+                'footer-desc': 'خدمات تنظيف منزلية محترفة بأسعار معقولة.',
+                'quick-links': 'روابط سريعة',
+                'our-services': 'خدماتنا',
+                'deep-cleaning': 'التنظيف العميق',
+                'contact-us': 'تواصل معنا',
+                'phone': '+966 12 345 6789',
+                'email': 'info@teleclean.com',
+                'address': 'الرياض، المملكة العربية السعودية',
+                'contact': 'اتصل بنا',
+                'copyright': '© 2025 TeleClean - جميع الحقوق محفوظة'
+            },
+            'en': {
+                'home': 'Home',
+                'about': 'About Us',
+                'services': 'Services',
+                'register': 'Register as Cleaner',
+                'hero-title': 'Professional Home Cleaning',
+                'hero-title-highlight': 'Services',
+                'hero-subtitle': 'We provide comprehensive cleaning services with a focus on quality and reliability for a cleaner, more comfortable home.',
+                'book-now': 'Book Now',
+                'services-title': 'Our Featured Services',
+                'services-subtitle': 'We offer a variety of high-quality cleaning services to meet your needs',
+                'service-1-title': 'House Cleaning',
+                'service-1-desc': 'We provide comprehensive home cleaning services at affordable prices to suit all budgets.',
+                'service-2-title': 'Carpet Cleaning',
+                'service-2-desc': 'Carpet cleaning services using the latest technologies and advanced equipment.',
+                'service-3-title': 'Window Cleaning',
+                'service-3-desc': 'Window cleaning with safe and effective products for spotless, shiny results.',
+                'learn-more': 'Learn More →',
+                'why-choose-title': 'Why Choose TeleClean?',
+                'why-choose-subtitle': 'At TeleClean, we provide professional home cleaning services that meet the highest quality standards. We believe your home deserves the best.',
+                'feature-1-title': 'High Quality',
+                'feature-1-desc': 'We use the latest technologies and safe products to ensure the best cleaning results.',
+                'feature-2-title': 'Professional Team',
+                'feature-2-desc': 'Our team is well-trained and has extensive experience in the cleaning field.',
+                'feature-3-title': 'Competitive Prices',
+                'feature-3-desc': 'We offer our services at reasonable prices to suit all categories.',
+                'reviews-title': 'Customer Reviews',
+                'reviews-subtitle': 'See what our previous customers have to say about our services',
+                'review-1': '"Excellent service and professional team. The house became completely clean with a fresh smell. I highly recommend them!"',
+                'reviewer-1': 'Ahmed Mohammed',
+                'location-1': 'Riyadh',
+                'review-2': '"The cleaning was quick and effective. The team is professional and cooperative. I will use their services again. Thank you!"',
+                'reviewer-2': 'Fatima Ali',
+                'location-2': 'Jeddah',
+                'review-3': '"Reasonable prices and high quality. The carpet became as clean as new. Distinguished and professional work team. I recommend them."',
+                'reviewer-3': 'Khalid Abdullah',
+                'location-3': 'Dammam',
+                'cta-title': 'Ready to Experience Our Services?',
+                'cta-subtitle': 'Get a clean and comfortable home with our distinguished services. Book now and enjoy a 15% discount on your first booking.',
+                'partners-title': 'Our Partners',
+                'footer-desc': 'Professional home cleaning services at reasonable prices.',
+                'quick-links': 'Quick Links',
+                'our-services': 'Our Services',
+                'deep-cleaning': 'Deep Cleaning',
+                'contact-us': 'Contact Us',
+                'phone': '+966 12 345 6789',
+                'email': 'info@teleclean.com',
+                'address': 'Riyadh, Saudi Arabia',
+                'contact': 'Contact Us',
+                'copyright': '© 2025 TeleClean - All Rights Reserved'
+            }
+        };
+        
+        // Function to update language
+        function updateLanguage(lang) {
+            // Save preference to localStorage
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // Update HTML attributes
+            htmlRoot.setAttribute('lang', lang);
+            htmlRoot.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+            
+            // Update body class for font family
+            document.body.classList.toggle('ltr', lang === 'en');
+            
+            // Update all elements with data-key attribute
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update active state in language toggles
+            document.querySelectorAll('.language-toggle span').forEach(span => {
+                span.classList.toggle('active', span.getAttribute('data-lang') === lang);
+            });
+            
+            // Ensure overlay is hidden when changing language
+            overlay.classList.remove('open');
+            sidebar.classList.remove('open');
+        }
+        
+        // Initialize language from localStorage or default to Arabic
+        const savedLanguage = localStorage.getItem('preferredLanguage') || 'ar';
+        updateLanguage(savedLanguage);
+        
+        // Add click event listeners to language toggles
+        function setupLanguageToggle(toggleElement) {
+            if (toggleElement) {
+                toggleElement.querySelectorAll('span').forEach(span => {
+                    span.addEventListener('click', () => {
+                        const lang = span.getAttribute('data-lang');
+                        updateLanguage(lang);
+                    });
+                });
+            }
+        }
+        
+        setupLanguageToggle(languageToggle);
+        setupLanguageToggle(sidebarLanguageToggle);
     </script>
 </body>
 </html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlRoot">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل منظفة - تيلكلين</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f9fafb;
+        }
+        
+        body.ltr {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #06b6d4, #0ea5e9, #3b82f6);
+            background-size: 200% 200%;
+            animation: gradient-animation 15s ease infinite;
+        }
+        
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .form-container {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .footer-gradient {
+            background: linear-gradient(to right, #0f172a, #1e293b);
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .checkbox-custom {
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-custom input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 0.25rem;
+            border: 2px solid #d1d5db;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: white;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .checkbox-custom input[type="checkbox"]:checked {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="sticky top-0 z-40 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-600">TeleClean</div>
+            <a href="/" class="font-medium text-gray-700 hover:text-blue-600 transition-colors">العودة للرئيسية</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg py-12 md:py-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <defs>
+                    <pattern id="pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <circle cx="20" cy="20" r="1" fill="white" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#pattern)" />
+            </svg>
+        </div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold text-white mb-4">تسجيل كمنظفة</h1>
+            <p class="text-xl text-white opacity-90 max-w-2xl mx-auto">انضم إلى فريقنا المحترف وابدأ في تقديم خدمات التنظيف مع تيلكلين</p>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="py-12 md:py-20">
+        <div class="container mx-auto px-4">
+            <div class="form-container max-w-2xl mx-auto bg-white p-6 md:p-10">
+                <form id="cleanerForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- الاسم -->
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">الاسم الكامل</label>
+                            <input type="text" name="name" required 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <!-- البريد الإلكتروني -->
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">البريد الإلكتروني</label>
+                            <input type="email" name="email" required 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+
+                    <!-- المهارات -->
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">المهارات</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="checkbox-custom">
+                                <input type="checkbox" name="skills" value="تنظيف المنازل" id="skill1">
+                                <label for="skill1">تنظيف المنازل</label>
+                            </div>
+                            <div class="checkbox-custom">
+                                <input type="checkbox" name="skills" value="تنظيف السجاد" id="skill2">
+                                <label for="skill2">تنظيف السجاد</label>
+                            </div>
+                            <div class="checkbox-custom">
+                                <input type="checkbox" name="skills" value="تنظيف النوافذ" id="skill3">
+                                <label for="skill3">تنظيف النوافذ</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- السعر -->
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">السعر لكل ساعة (ر.س)</label>
+                            <input type="number" name="price" required 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <!-- الموقع -->
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">الموقع الجغرافي</label>
+                            <input type="text" name="location" required 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+
+                    <!-- نبذة عن الخبرات -->
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">نبذة عن خبراتك</label>
+                        <textarea name="experience" rows="4" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-3 px-6 rounded-full font-bold hover:shadow-lg transition-all duration-300">
+                        تسجيل
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-gradient text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 TeleClean - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('cleanerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'جاري المعالجة...';
+            
+            const formData = {
+                name: e.target.name.value,
+                email: e.target.email.value,
+                skills: Array.from(e.target.skills)
+                    .filter(checkbox => checkbox.checked)
+                    .map(checkbox => checkbox.value),
+                price: e.target.price.value,
+                location: e.target.location.value,
+                experience: e.target.experience.value
+            };
+
+            try {
+                const response = await fetch('/api/cleaners', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    alert('تم التسجيل بنجاح! سنتواصل معك قريبًا.');
+                    window.location.href = '/';
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'حدث خطأ أثناء التسجيل');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert(error.message || 'حدث خطأ أثناء التسجيل');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'تسجيل';
+            }
+        });
+    </script>
+</body>
+</html>
