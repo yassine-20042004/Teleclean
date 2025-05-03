@@ -1,182 +1,230 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>طلب خدمة تنظيف - تيلكلين</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
     <style>
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f9fafb;
         }
-
+        
+        body.ltr {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #06b6d4, #0ea5e9, #3b82f6);
+            background-size: 200% 200%;
+            animation: gradient-animation 15s ease infinite;
+        }
+        
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
         .service-card {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.3s ease;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             cursor: pointer;
             border: 2px solid transparent;
         }
-
+        
         .service-card.selected {
             border-color: #3b82f6;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
-
+        
         .service-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
-
-        .terms-checkbox {
-            display: flex;
-            align-items: center;
-            margin-top: 1rem;
+        
+        .form-container {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
-
-        .terms-checkbox input {
-            margin-left: 0.5rem;
+        
+        .footer-gradient {
+            background: linear-gradient(to right, #0f172a, #1e293b);
         }
-
-        @media (max-width: 768px) {
-            .form-container {
-                padding: 15px;
-            }
-            
-            .service-card {
-                padding: 8px;
-            }
-            
-            .service-card h3 {
-                font-size: 0.9rem;
-            }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
     </style>
 </head>
-<body class="font-sans bg-gray-100">
+<body>
     <!-- Header Section -->
-    <header class="bg-blue-600 text-white py-4 shadow-md">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <div class="text-2xl font-bold">TeleClean</div>
-            <nav class="hidden md:flex space-x-4">
-                <a href="/" class="hover:text-gray-300">الرئيسية</a>
-                <a href="/about" class="hover:text-gray-300">من نحن</a>
-                <a href="/services" class="hover:text-gray-300">الخدمات</a>
+    <header class="sticky top-0 z-40 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-600">TeleClean</div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="/" class="font-medium text-gray-700 hover:text-blue-600 transition-colors">الرئيسية</a>
+                <a href="/about" class="font-medium text-gray-700 hover:text-blue-600 transition-colors">من نحن</a>
+                <a href="/services" class="font-medium text-gray-700 hover:text-blue-600 transition-colors">الخدمات</a>
             </nav>
         </div>
     </header>
 
+    <!-- Hero Section -->
+    <section class="gradient-bg py-12 md:py-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <defs>
+                    <pattern id="pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <circle cx="20" cy="20" r="1" fill="white" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#pattern)" />
+            </svg>
+        </div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold text-white mb-4">طلب خدمة تنظيف</h1>
+            <p class="text-xl text-white opacity-90 max-w-2xl mx-auto">املأ النموذج أدناه لطلب خدمة تنظيف احترافية تناسب احتياجاتك</p>
+        </div>
+    </section>
+
     <!-- Form Section -->
-    <section class="py-8 md:py-20">
-        <div class="form-container">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">طلب خدمة تنظيف</h2>
-            <form id="orderForm" class="space-y-5 md:space-y-6">
-                <!-- Service Selection Cards -->
-                <div class="grid grid-cols-3 gap-2 md:gap-4 mb-6">
-                    <!-- Service 1: House Cleaning -->
-                    <div class="service-card bg-white p-2 md:p-6 rounded shadow-lg text-center" onclick="selectService('تنظيف المنزل')">
-                        <div class="mb-1 md:mb-4">
-                            <img src="home.gif" alt="تنظيف المنزل" class="w-8 h-8 md:w-16 md:h-16 mx-auto">
+    <section class="py-12 md:py-20">
+        <div class="container mx-auto px-4">
+            <div class="form-container max-w-3xl mx-auto bg-white p-6 md:p-10">
+                <form id="orderForm" class="space-y-6">
+                    <!-- Service Selection Cards -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">اختر نوع الخدمة</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                            <!-- Service 1: House Cleaning -->
+                            <div class="service-card bg-white p-6 text-center" onclick="selectService('تنظيف المنزل')">
+                                <div class="mb-4 bg-blue-50 h-16 w-16 rounded-full flex items-center justify-center mx-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">تنظيف المنزل</h3>
+                                <p class="text-gray-600 text-sm">نقدم خدمات تنظيف شاملة للمنازل بأسعار معقولة.</p>
+                            </div>
+
+                            <!-- Service 2: Carpet Cleaning -->
+                            <div class="service-card bg-white p-6 text-center" onclick="selectService('تنظيف السجاد')">
+                                <div class="mb-4 bg-blue-50 h-16 w-16 rounded-full flex items-center justify-center mx-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">تنظيف السجاد</h3>
+                                <p class="text-gray-600 text-sm">خدمات تنظيف السجاد باستخدام أحدث التقنيات.</p>
+                            </div>
+
+                            <!-- Service 3: Window Cleaning -->
+                            <div class="service-card bg-white p-6 text-center" onclick="selectService('تنظيف النوافذ')">
+                                <div class="mb-4 bg-blue-50 h-16 w-16 rounded-full flex items-center justify-center mx-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">تنظيف النوافذ</h3>
+                                <p class="text-gray-600 text-sm">تنظيف النوافذ بمنتجات آمنة وفعالة.</p>
+                            </div>
                         </div>
-                        <h3 class="text-sm md:text-xl font-bold">تنظيف المنزل</h3>
-                        <p class="text-gray-700 text-xs md:text-base hidden md:block mt-2">نقدم خدمات تنظيف شاملة للمنازل بأسعار معقولة.</p>
                     </div>
 
-                    <!-- Service 2: Carpet Cleaning -->
-                    <div class="service-card bg-white p-2 md:p-6 rounded shadow-lg text-center" onclick="selectService('تنظيف السجاد')">
-                        <div class="mb-1 md:mb-4">
-                            <img src="carpet.gif" alt="تنظيف السجاد" class="w-8 h-8 md:w-16 md:h-16 mx-auto">
+                    <!-- Hidden Input for Selected Service -->
+                    <input type="hidden" id="service" name="service" required>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Name -->
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-2">الاسم الكامل</label>
+                            <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
-                        <h3 class="text-sm md:text-xl font-bold">تنظيف السجاد</h3>
-                        <p class="text-gray-700 text-xs md:text-base hidden md:block mt-2">خدمات تنظيف السجاد باستخدام أحدث التقنيات.</p>
+
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">البريد الإلكتروني</label>
+                            <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
                     </div>
 
-                    <!-- Service 3: Window Cleaning -->
-                    <div class="service-card bg-white p-2 md:p-6 rounded shadow-lg text-center" onclick="selectService('تنظيف النوافذ')">
-                        <div class="mb-1 md:mb-4">
-                            <img src="windows.gif" alt="تنظيف النوافذ" class="w-8 h-8 md:w-16 md:h-16 mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Phone -->
+                        <div>
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">رقم الهاتف</label>
+                            <input type="tel" id="phone" name="phone" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
-                        <h3 class="text-sm md:text-xl font-bold">تنظيف النوافذ</h3>
-                        <p class="text-gray-700 text-xs md:text-base hidden md:block mt-2">تنظيف النوافذ بمنتجات آمنة وفعالة.</p>
+
+                        <!-- Number of Rooms -->
+                        <div>
+                            <label for="rooms" class="block text-gray-700 font-medium mb-2">عدد الغرف</label>
+                            <input type="number" id="rooms" name="rooms" min="1" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Hidden Input for Selected Service -->
-                <input type="hidden" id="service" name="service" required>
+                    <!-- Address -->
+                    <div>
+                        <label for="address" class="block text-gray-700 font-medium mb-2">العنوان</label>
+                        <textarea id="address" name="address" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3"></textarea>
+                    </div>
 
-                <!-- Name -->
-                <div>
-                    <label for="name" class="block text-gray-700">الاسم الكامل</label>
-                    <input type="text" id="name" name="name" required class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
-                </div>
+                    <!-- Additional Notes -->
+                    <div>
+                        <label for="notes" class="block text-gray-700 font-medium mb-2">ملاحظات إضافية</label>
+                        <textarea id="notes" name="notes" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3"></textarea>
+                    </div>
 
-                <!-- Email -->
-                <div>
-                    <label for="email" class="block text-gray-700">البريد الإلكتروني</label>
-                    <input type="email" id="email" name="email" required class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
-                </div>
+                    <!-- Terms and Conditions -->
+                    <div class="flex items-center">
+                        <input type="checkbox" id="terms" name="terms" required class="h-5 w-5 text-blue-600 rounded">
+                        <label for="terms" class="mr-2 text-gray-700">
+                            أوافق على <a href="#" onclick="openTermsModal(); return false;" class="text-blue-600 hover:underline">الشروط والأحكام</a>
+                        </label>
+                    </div>
 
-                <!-- Phone -->
-                <div>
-                    <label for="phone" class="block text-gray-700">رقم الهاتف</label>
-                    <input type="tel" id="phone" name="phone" required class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
-                </div>
-
-                <!-- Address -->
-                <div>
-                    <label for="address" class="block text-gray-700">العنوان</label>
-                    <textarea id="address" name="address" required class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
-                </div>
-
-                <!-- Number of Rooms -->
-                <div>
-                    <label for="rooms" class="block text-gray-700">عدد الغرف</label>
-                    <input type="number" id="rooms" name="rooms" min="1" required class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
-                </div>
-
-                <!-- Additional Notes -->
-                <div>
-                    <label for="notes" class="block text-gray-700">ملاحظات إضافية</label>
-                    <textarea id="notes" name="notes" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
-                </div>
-
-                <!-- Terms and Conditions -->
-                <div class="terms-checkbox">
-                    <input type="checkbox" id="terms" name="terms" required class="form-checkbox h-5 w-5 text-blue-600">
-                    <label for="terms" class="text-gray-700">
-                        أوافق على <a href="#" onclick="openTermsModal(); return false;" class="text-blue-600 hover:underline">الشروط والأحكام</a>
-                    </label>
-                </div>
-
-                <!-- Submit Button -->
-                <div>
-                    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">إرسال الطلب</button>
-                </div>
-            </form>
+                    <!-- Submit Button -->
+                    <div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-3 px-6 rounded-full font-bold hover:shadow-lg transition-all duration-300">
+                            إرسال الطلب
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
 
     <!-- Terms and Conditions Modal -->
     <div id="terms-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
-        <div class="bg-white p-6 rounded-lg max-w-2xl mx-auto mt-10 m-4">
-            <h3 class="text-xl md:text-2xl font-bold mb-4">الشروط والأحكام</h3>
-            <p class="text-gray-700 mb-4">
-                نحن في تيلكلين نلتزم بحماية خصوصيتك وبياناتك الشخصية. البيانات التي تقدمها لنا ستستخدم فقط لغرض تقديم الخدمات المطلوبة ولن يتم مشاركتها مع أي أطراف خارجية لأي أغراض تجارية أو غيرها.
-            </p>
-            <p class="text-gray-700 mb-4">
-                نضمن لك أن بياناتك ستكون آمنة ولن يتم استخدامها لأي أغراض غير مشروعة أو ضارة. يمكنك الاطلاع على سياسة الخصوصية الكاملة <a href="/privacy-policy" class="text-blue-600 hover:underline">هنا</a>.
-            </p>
-            <button onclick="closeTermsModal()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">إغلاق</button>
+        <div class="bg-white p-6 rounded-2xl max-w-2xl mx-auto mt-20 m-4">
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">الشروط والأحكام</h3>
+            <div class="prose max-w-none mb-6">
+                <p class="text-gray-700 mb-4">
+                    نحن في تيلكلين نلتزم بحماية خصوصيتك وبياناتك الشخصية. البيانات التي تقدمها لنا ستستخدم فقط لغرض تقديم الخدمات المطلوبة ولن يتم مشاركتها مع أي أطراف خارجية لأي أغراض تجارية أو غيرها.
+                </p>
+                <p class="text-gray-700 mb-4">
+                    نضمن لك أن بياناتك ستكون آمنة ولن يتم استخدامها لأي أغراض غير مشروعة أو ضارة. يمكنك الاطلاع على سياسة الخصوصية الكاملة <a href="/privacy-policy" class="text-blue-600 hover:underline">هنا</a>.
+                </p>
+            </div>
+            <button onclick="closeTermsModal()" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2 px-6 rounded-full font-bold hover:shadow-lg transition-all duration-300">
+                إغلاق
+            </button>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-blue-600 text-white py-6 md:py-10 text-center mt-8">
-        <p>&copy; 2025 TeleClean - جميع الحقوق محفوظة</p>
+    <footer class="footer-gradient text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 TeleClean - جميع الحقوق محفوظة</p>
+        </div>
     </footer>
 
     <script>
@@ -199,51 +247,52 @@
     
         // Form submission handler
         document.getElementById('orderForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
-    
-    if (!validateForm()) return;
-    
-    const submitBtn = event.target.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'جاري المعالجة...';
-    
-    try {
-        const formData = {
-            name: document.getElementById('name').value.trim(),
-            email: document.getElementById('email').value.trim(),
-            phone: document.getElementById('phone').value.trim(),
-            address: document.getElementById('address').value.trim(),
-            service: document.getElementById('service').value,
-            rooms: parseInt(document.getElementById('rooms').value),
-            notes: document.getElementById('notes').value.trim()
-        };
-        
-        const response = await fetch('/submit-order', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
+            event.preventDefault();
+            
+            if (!validateForm()) return;
+            
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'جاري المعالجة...';
+            
+            try {
+                const formData = {
+                    name: document.getElementById('name').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    phone: document.getElementById('phone').value.trim(),
+                    address: document.getElementById('address').value.trim(),
+                    service: document.getElementById('service').value,
+                    rooms: parseInt(document.getElementById('rooms').value),
+                    notes: document.getElementById('notes').value.trim()
+                };
+                
+                const response = await fetch('/submit-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Request failed');
+                }
+                
+                if (data.success && data.redirectUrl) {
+                    window.location.href = data.redirectUrl; // This will now go to payment-method.html
+                } else {
+                    throw new Error(data.error || 'Unknown error occurred');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert(error.message || 'حدث خطأ أثناء إرسال الطلب');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'إرسال الطلب';
+            }
         });
         
-        const data = await response.json();
-        
-        if (!response.ok) {
-            throw new Error(data.error || 'Request failed');
-        }
-        
-        if (data.success && data.redirectUrl) {
-            window.location.href = data.redirectUrl; // This will now go to payment-method.html
-        } else {
-            throw new Error(data.error || 'Unknown error occurred');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert(error.message || 'حدث خطأ أثناء إرسال الطلب');
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'إرسال الطلب';
-    }
-});
         function validateForm() {
             // Validate service selection
             const service = document.getElementById('service').value;

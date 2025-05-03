@@ -1,147 +1,180 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>طريقة الدفع - تيلكلين</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
     <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f9fafb;
+        }
+        
+        body.ltr {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #06b6d4, #0ea5e9, #3b82f6);
+            background-size: 200% 200%;
+            animation: gradient-animation 15s ease infinite;
+        }
+        
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
         .payment-card {
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
+        
         .payment-card.selected {
             border-color: #3b82f6;
             background-color: #f0f7ff;
         }
+        
         .payment-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
+        
         .card-input {
             letter-spacing: 1px;
         }
+        
         .card-input::placeholder {
             letter-spacing: normal;
         }
+        
+        .footer-gradient {
+            background: linear-gradient(to right, #0f172a, #1e293b);
+        }
     </style>
 </head>
-<body class="font-sans bg-gray-50">
-    <div class="min-h-screen flex flex-col">
-        <!-- Header -->
-        <header class="bg-blue-600 text-white py-4 shadow-md">
-            <div class="container mx-auto px-4 flex justify-between items-center">
-                <div class="text-2xl font-bold">TeleClean</div>
-                <a href="/" class="hover:text-gray-300">العودة إلى الرئيسية</a>
-            </div>
-        </header>
+<body>
+    <!-- Header Section -->
+    <header class="sticky top-0 z-40 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-600">TeleClean</div>
+            <a href="/" class="font-medium text-gray-700 hover:text-blue-600 transition-colors">العودة للرئيسية</a>
+        </div>
+    </header>
 
-        <!-- Main Content -->
-        <main class="flex-grow container mx-auto px-4 py-8">
-            <div class="max-w-md mx-auto">
-                <!-- Order Summary -->
-                <div class="bg-white p-6 rounded-lg shadow-md mb-6">
-                    <h2 class="text-xl font-bold mb-4 text-gray-800">ملخص الطلب</h2>
-                    <div id="order-summary" class="text-gray-600">
-                        <!-- Will be populated by JavaScript -->
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="max-w-md mx-auto">
+            <!-- Order Summary -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm mb-6">
+                <h2 class="text-xl font-bold mb-4 text-gray-800">ملخص الطلب</h2>
+                <div id="order-summary" class="text-gray-600">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm">
+                <h1 class="text-xl font-bold mb-6 text-gray-800">اختر طريقة الدفع</h1>
+                
+                <!-- Payment Options -->
+                <div class="space-y-4 mb-6">
+                    <!-- Cash Option -->
+                    <div id="cash-option" class="payment-card selected p-4 cursor-pointer"
+                         onclick="selectPaymentMethod('cash')">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-money-bill-wave text-blue-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-800">الدفع نقداً عند الاستلام</h3>
+                                <p class="text-sm text-gray-600">ستقوم بالدفع عند وصول الفني</p>
+                            </div>
+                            <div class="mr-auto">
+                                <div class="h-5 w-5 rounded-full border-2 border-blue-600 flex items-center justify-center">
+                                    <div class="h-3 w-3 rounded-full bg-blue-600"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card Option -->
+                    <div id="card-option" class="payment-card p-4 cursor-pointer"
+                         onclick="selectPaymentMethod('card')">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                <i class="far fa-credit-card text-blue-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-800">الدفع بالبطاقة</h3>
+                                <p class="text-sm text-gray-600">ادخل بيانات بطاقتك للدفع الآمن</p>
+                            </div>
+                            <div class="mr-auto">
+                                <div class="h-5 w-5 rounded-full border-2 border-gray-300"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Payment Methods -->
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h1 class="text-xl font-bold mb-6 text-gray-800">اختر طريقة الدفع</h1>
-                    
-                    <!-- Payment Options -->
-                    <div class="space-y-4 mb-6">
-                        <!-- Cash Option -->
-                        <div id="cash-option" class="payment-card selected p-4 rounded-lg cursor-pointer"
-                             onclick="selectPaymentMethod('cash')">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                                    <i class="fas fa-money-bill-wave text-blue-600"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-medium text-gray-800">الدفع نقداً عند الاستلام</h3>
-                                    <p class="text-sm text-gray-600">ستقوم بالدفع عند وصول الفني</p>
-                                </div>
-                                <div class="mr-auto">
-                                    <div class="h-5 w-5 rounded-full border-2 border-blue-600 flex items-center justify-center">
-                                        <div class="h-3 w-3 rounded-full bg-blue-600"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Card Option -->
-                        <div id="card-option" class="payment-card p-4 rounded-lg cursor-pointer"
-                             onclick="selectPaymentMethod('card')">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                                    <i class="far fa-credit-card text-blue-600"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-medium text-gray-800">الدفع بالبطاقة</h3>
-                                    <p class="text-sm text-gray-600">ادخل بيانات بطاقتك للدفع الآمن</p>
-                                </div>
-                                <div class="mr-auto">
-                                    <div class="h-5 w-5 rounded-full border-2 border-gray-300"></div>
-                                </div>
+                
+                <!-- Card Form (Initially Hidden) -->
+                <div id="card-form" class="hidden space-y-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">رقم البطاقة</label>
+                        <div class="relative">
+                            <input type="text" id="card-number" 
+                                   class="card-input w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                   placeholder="1234 5678 9012 3456" maxlength="19">
+                            <div class="absolute left-3 top-3 text-gray-400">
+                                <i class="fab fa-cc-visa"></i>
+                                <i class="fab fa-cc-mastercard ml-2"></i>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Card Form (Initially Hidden) -->
-                    <div id="card-form" class="hidden space-y-4 mb-6">
+                    <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">رقم البطاقة</label>
-                            <div class="relative">
-                                <input type="text" id="card-number" 
-                                       class="card-input w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                       placeholder="1234 5678 9012 3456" maxlength="19">
-                                <div class="absolute left-3 top-3 text-gray-400">
-                                    <i class="fab fa-cc-visa"></i>
-                                    <i class="fab fa-cc-mastercard ml-2"></i>
-                                </div>
-                            </div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">تاريخ الانتهاء</label>
+                            <input type="text" id="card-expiry" 
+                                   class="card-input w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                   placeholder="MM/YY" maxlength="5">
                         </div>
-                        
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">تاريخ الانتهاء</label>
-                                <input type="text" id="card-expiry" 
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">رمز الأمان (CVV)</label>
+                            <div class="relative">
+                                <input type="text" id="card-cvv" 
                                        class="card-input w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                       placeholder="MM/YY" maxlength="5">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">رمز الأمان (CVV)</label>
-                                <div class="relative">
-                                    <input type="text" id="card-cvv" 
-                                           class="card-input w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                           placeholder="123" maxlength="3">
-                                    <div class="absolute left-3 top-3 text-gray-400">
-                                        <i class="fas fa-lock"></i>
-                                    </div>
+                                       placeholder="123" maxlength="3">
+                                <div class="absolute left-3 top-3 text-gray-400">
+                                    <i class="fas fa-lock"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Continue Button -->
-                    <button onclick="processPayment()" 
-                            class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
-                        تأكيد الدفع ومتابعة
-                        <i class="fas fa-arrow-left mr-2"></i>
-                    </button>
                 </div>
+                
+                <!-- Continue Button -->
+                <button onclick="processPayment()" 
+                        class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-3 px-6 rounded-full font-bold hover:shadow-lg transition-all duration-300">
+                    تأكيد الدفع ومتابعة
+                    <i class="fas fa-arrow-left mr-2"></i>
+                </button>
             </div>
-        </main>
+        </div>
+    </main>
 
-        <!-- Footer -->
-        <footer class="bg-gray-100 text-gray-600 py-4 text-center text-sm">
-            <p>© 2025 TeleClean - جميع الحقوق محفوظة</p>
-        </footer>
-    </div>
+    <!-- Footer -->
+    <footer class="footer-gradient text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 TeleClean - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
 
     <script>
         let paymentMethod = "cash";
